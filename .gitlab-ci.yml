@@ -1,0 +1,11 @@
+stages:
+  - check
+
+env:
+  stage: check
+  tags: [gitlab-org-docker]
+  script:
+    - env | grep -i "CI_"
+    - hostname
+    - whoami
+    - ls -la
