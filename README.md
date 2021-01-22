@@ -1,2 +1,2 @@
 # pr-testing-github-workflow
-dummy commit - push testing on main
+dummy commit - pull testing on comment trigger
