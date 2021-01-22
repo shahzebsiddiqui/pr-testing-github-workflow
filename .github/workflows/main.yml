@@ -10,7 +10,8 @@ on:
     branches: [ main ]
   pull_request_target:
     branches: [ main ]
-
+  issue_comment:
+    types: [created]
 
 
   ## Allows you to run this workflow manually from the Actions tab
@@ -25,40 +26,50 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-        if: github.event_name == 'push'
+      - uses: khan/pull-request-comment-trigger@master
+        id: check
         with:
-          fetch-depth: 0
-          #ref: ${{ github.event.pull_request.head.ref }}
-      - uses: actions/checkout@v2
-        #if: ${{ github.event_name == 'pull_request' && failure() }}
-        if: github.event_name == 'pull_request'
-        with:
-          fetch-depth: 0
-      - uses: actions/checkout@v2
-        if: github.event_name == 'pull_request_target'
-        with:
-          ref: ${{github.event.pull_request.head.ref}}
-          repository: ${{github.event.pull_request.head.repo.full_name}}
-          fetch-depth: 0
-          
-      - name: Print context
-        run: |
-          echo "GITHUB ${{ github }}"
-          
-      # Runs a single command using the runners shell
-      - name: PR and Push testing on external Gitlab
-        uses: adityakavalur/gitlab-mirror-and-ci-action@master
-        with:
-          args: "https://gitlab.com/aditya.kavalur/pr-testing-github-workflow.git"
+          trigger: '@deploy'
+          reaction: rocket
         env:
-          GITLAB_HOSTNAME: "gitlab.com"
-          GITLAB_USERNAME: "aditya.kavalur"
-          #The below password is really a PAT, needs write
-          GITLAB_PASSWORD: ${{ secrets.GITLAB_PASSWORD_ALL }}
-          GITLAB_PROJECT_ID: "23857406"
-          #The below password is really a PAT, needs read
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          POLL_TIMEOUT: "120"
-          GITHUB_EVENT_NAME: github.event_name
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+      - run: 'echo Found it!'
+        if: steps.check.outputs.triggered == 'true'
+         
+#      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+#      - uses: actions/checkout@v2
+#        if: github.event_name == 'push'
+#        with:
+#          fetch-depth: 0
+#          #ref: ${{ github.event.pull_request.head.ref }}
+#      - uses: actions/checkout@v2
+#        #if: ${{ github.event_name == 'pull_request' && failure() }}
+#        if: github.event_name == 'pull_request'
+#        with:
+#          fetch-depth: 0
+#      - uses: actions/checkout@v2
+#        if: github.event_name == 'pull_request_target'
+#        with:
+#          ref: ${{github.event.pull_request.head.ref}}
+#          repository: ${{github.event.pull_request.head.repo.full_name}}
+#          fetch-depth: 0
+#          
+#      - name: Print context
+#        run: |
+#          echo "GITHUB ${{ github }}"
+#          
+#      # Runs a single command using the runners shell
+#      - name: PR and Push testing on external Gitlab
+#        uses: adityakavalur/gitlab-mirror-and-ci-action@master
+#        with:
+#          args: "https://gitlab.com/aditya.kavalur/pr-testing-github-workflow.git"
+#        env:
+#          GITLAB_HOSTNAME: "gitlab.com"
+#          GITLAB_USERNAME: "aditya.kavalur"
+#          #The below password is really a PAT, needs write
+#          GITLAB_PASSWORD: ${{ secrets.GITLAB_PASSWORD_ALL }}
+#          GITLAB_PROJECT_ID: "23857406"
+#          #The below password is really a PAT, needs read
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          POLL_TIMEOUT: "120"
+#          GITHUB_EVENT_NAME: github.event_name
