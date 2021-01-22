@@ -51,7 +51,7 @@ jobs:
       - name: PR and Push testing on external Gitlab
         uses: adityakavalur/gitlab-mirror-and-ci-action@master
         with:
-          args: "https://https://gitlab.com/aditya.kavalur/pr-testing-github-workflow.git"
+          args: "https://gitlab.com/aditya.kavalur/pr-testing-github-workflow.git"
         env:
           GITLAB_HOSTNAME: "gitlab.com"
           GITLAB_USERNAME: "aditya.kavalur"
