@@ -28,7 +28,7 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: khan/pull-request-comment-trigger@master
+      - uses: adityakavalur/pull-request-comment-trigger@master
         id: check
         with:
           trigger: '@Deploy'
