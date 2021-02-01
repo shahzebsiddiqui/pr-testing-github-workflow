@@ -26,12 +26,13 @@ on: issue_comment
 jobs:
   # This workflow contains a single job called "build"
   build:
-    if: ${{ github.event.issue.pull_request }}
+    #if: ${{ github.event.issue.pull_request }}
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     steps:
       - run: |
           echo "Comment on PR #${{ github.event.issue.number }}"
+          echo "Variable of issue pull request ${{ github.event.issue.pull_request }}"
 
 #    # Steps represent a sequence of tasks that will be executed as part of the job
 #    steps:
