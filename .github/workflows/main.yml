@@ -13,7 +13,8 @@ on:
   pull_request:
     types: [ opened ]
   issue_comment:
-    branch: [ main ]
+    types: [ created ]
+#    branch: [ main ]
 
 
   ## Allows you to run this workflow manually from the Actions tab
