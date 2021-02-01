@@ -31,7 +31,7 @@ jobs:
       - uses: adityakavalur/pull-request-comment-trigger@master
         id: check
         with:
-          trigger: '@Deploy'
+          trigger: '#Deploy'
           reaction: rocket
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
