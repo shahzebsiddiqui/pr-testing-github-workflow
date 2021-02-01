@@ -3,17 +3,19 @@
 name: Mirror and run Gitlab CI on pull requests and push
 
 # Controls when the action will run. 
-on:
+
+on: issue_comment
+#on:
 #  push:
 #    branches: [ main ]
 #  pull_request:
 #    branches: [ main ]
 #  pull_request_target:
 #    branches: [ main ]
-  pull_request:
-    types: [ opened ]
-  issue_comment:
-    types: [ created, edited ]
+#  pull_request:
+#    types: [ opened ]
+#  issue_comment:
+#    types: [ created, edited ]
 #    branch: [ main ]
 
 
