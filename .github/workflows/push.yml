@@ -70,7 +70,7 @@ jobs:
 #          
       # Runs a single command using the runners shell
       - name: Push testing on external Gitlab
-        uses: adityakavalur/gitlab-mirror-and-ci-action@master
+        uses: adityakavalur/gitlab-mirror-and-ci-action@secure
         with:
           args: "https://gitlab.com/aditya.kavalur/pr-testing-github-workflow.git"
         env:
