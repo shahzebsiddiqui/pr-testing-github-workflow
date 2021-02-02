@@ -1,4 +1,5 @@
-# This is a basic workflow to help you get started with Actions
+# This is a basic workflow that runs if the commit author is 
+#listed as a member of the associated organization or is the owner of the (personal) repo
 
 name: Push testing
 
