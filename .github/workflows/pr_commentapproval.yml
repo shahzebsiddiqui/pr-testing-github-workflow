@@ -2,7 +2,7 @@
 #  member of the associated organization or the owner of the (personal) repo
 # comments with the triggerstring
 
-name: Pull testing comment approval
+name: PR comment approval
 
 # Controls when the action will run. 
 
@@ -11,7 +11,7 @@ on: pull_request
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  pullcomment:
+  prcommentapproval:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 #    if: ${{ github.event.issue.pull_request }}
