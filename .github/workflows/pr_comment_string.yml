@@ -1,0 +1,26 @@
+# This is a basic workflow that runs if a
+#  member of the associated organization or the owner of the (personal) repo
+# comments with the triggerstring
+
+name: Issue comment string
+
+# Controls when the action will run. 
+on:
+  pull_request:
+    types: [opened]
+  issue_comment:
+    types: [created]
+    
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: khan/pull-request-comment-trigger@master
+        id: check
+        with:
+          trigger: '@Deploy'
+          reaction: rocket
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+      - run: 'echo Found it!'
+        if: steps.check.outputs.triggered == 'true'
