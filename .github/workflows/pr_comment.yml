@@ -16,22 +16,24 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.issue.pull_request }}
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-          
-      # Runs a single command using the runners shell
-      - name: Push testing on external Gitlab
-        uses: adityakavalur/gitlab-mirror-and-ci-action@secure
-        with:
-          args: "https://gitlab.com/aditya.kavalur/pr-testing-github-workflow.git"
-        env:
-          GITLAB_HOSTNAME: "gitlab.com"
-          GITLAB_USERNAME: "aditya.kavalur"
-          #The below password is really a PAT, needs write
-          GITLAB_PASSWORD: ${{ secrets.GITLAB_PASSWORD_ALL }}
-          GITLAB_PROJECT_ID: "23857406"
-          #The below password is really a PAT, needs read
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          POLL_TIMEOUT: "120"
-          GITHUB_EVENT_NAME: github.event_name
+      - run: |
+          echo "Comment on PR #${{ github.event.issue.number }}"
+#      - uses: actions/checkout@v2
+#        with:
+#          fetch-depth: 0
+#          
+#      # Runs a single command using the runners shell
+#      - name: Push testing on external Gitlab
+#        uses: adityakavalur/gitlab-mirror-and-ci-action@secure
+#        with:
+#          args: "https://gitlab.com/aditya.kavalur/pr-testing-github-workflow.git"
+#        env:
+#          GITLAB_HOSTNAME: "gitlab.com"
+#          GITLAB_USERNAME: "aditya.kavalur"
+#          #The below password is really a PAT, needs write
+#          GITLAB_PASSWORD: ${{ secrets.GITLAB_PASSWORD_ALL }}
+#          GITLAB_PROJECT_ID: "23857406"
+#          #The below password is really a PAT, needs read
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          POLL_TIMEOUT: "120"
+#          GITHUB_EVENT_NAME: github.event_name
