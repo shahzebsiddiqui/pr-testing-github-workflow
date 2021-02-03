@@ -1,0 +1,37 @@
+# This is a basic workflow that runs if a
+#  member of the associated organization or the owner of the (personal) repo
+# comments with the triggerstring
+
+name: Pull testing comment approval
+
+# Controls when the action will run. 
+
+on: issue_comment
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  pullcomment:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+      - uses: actions/checkout@v2
+        #if: ${{ github.event_name == 'pull_request' && failure() }}
+        if: github.event_name == 'issue_comment'
+        with:
+          fetch-depth: 0
+          
+      # Runs a single command using the runners shell
+      - name: Push testing on external Gitlab
+        uses: adityakavalur/gitlab-mirror-and-ci-action@secure
+        with:
+          args: "https://gitlab.com/aditya.kavalur/pr-testing-github-workflow.git"
+        env:
+          GITLAB_HOSTNAME: "gitlab.com"
+          GITLAB_USERNAME: "aditya.kavalur"
+          #The below password is really a PAT, needs write
+          GITLAB_PASSWORD: ${{ secrets.GITLAB_PASSWORD_ALL }}
+          GITLAB_PROJECT_ID: "23857406"
+          #The below password is really a PAT, needs read
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          POLL_TIMEOUT: "120"
+          GITHUB_EVENT_NAME: github.event_name
