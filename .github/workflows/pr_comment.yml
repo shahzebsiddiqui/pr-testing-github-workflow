@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        if: github.event_name == 'issue_comment'
+        if: ${{ github.event.issue.pull_request }}
         with:
           fetch-depth: 0
           
