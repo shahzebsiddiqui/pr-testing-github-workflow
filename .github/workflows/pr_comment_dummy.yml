@@ -1,0 +1,20 @@
+# This is a basic workflow that runs if a
+#  member of the associated organization or the owner of the (personal) repo
+# comments with the triggerstring
+
+name: Issue comment
+
+# Controls when the action will run. 
+
+on: issue_comment
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  pullcomment:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+#    if: ${{ github.event.issue.pull_request }}
+    steps:
+      - run: |
+          echo "Comment on PR #${{ github.event.issue.number }}"
