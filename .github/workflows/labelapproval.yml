@@ -17,7 +17,7 @@ jobs:
   # This workflow contains a single job called "build"
   PR_Label:
     # The type of runner that the job will run on
-    if: github.event.label.name == 'triggerlabel'
+#    if: github.event.label.name == 'triggerlabel'
     runs-on: ubuntu-latest
 #    if: ${{ github.event.issue.pull_request }}
     steps:
