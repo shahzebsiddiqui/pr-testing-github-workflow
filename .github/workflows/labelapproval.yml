@@ -10,7 +10,10 @@ name: PR Label
 #    types:
 #      - labeled
 
-on: pull_request_target
+on: 
+  pull_request_target:
+    types:
+      - labeled
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
