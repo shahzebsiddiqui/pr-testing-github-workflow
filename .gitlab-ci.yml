@@ -10,3 +10,4 @@ env:
     - hostname
     - whoami
     - ls -la
+    - date
