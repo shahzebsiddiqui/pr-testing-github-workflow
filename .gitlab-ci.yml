@@ -6,6 +6,7 @@ env:
   tags: [gitlab-org-docker]
   script:
     - env | grep -i "CI_"
+    - env | grep -i "GITHUB"
     - hostname
     - whoami
     - ls -la
