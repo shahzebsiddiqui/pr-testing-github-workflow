@@ -1,2 +1,2 @@
 # pr-testing-github-workflow
-on branch: main
+on branch: main, push testing
